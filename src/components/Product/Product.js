@@ -5,7 +5,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 
 const Product = (props) => {
-    const {img, name, seller, wholePrice, priceFraction, stock} = props.product;
+    const {key, img, name, seller, wholePrice, priceFraction, stock} = props.product;
     return (
         <div>
             <div className="row product-div shadow">
@@ -17,7 +17,8 @@ const Product = (props) => {
                     <h6>by: {seller}</h6>
                     <h5>$<b>{wholePrice}.{priceFraction}</b></h5>
                     <p>only <b>{stock}</b> left in stock - order soon</p>
-                    <a href="/" className="btn btn-success"><FontAwesomeIcon icon={faShoppingCart} />add to cart</a>
+                    <button onClick={() => props.btnCk(props.product)} name="ck" className="btn btn-success"><FontAwesomeIcon icon={faShoppingCart} />add to cart</button>
+                    {/* <button onClick={props.btnCk} name="ck" className="btn btn-success"><FontAwesomeIcon icon={faShoppingCart} />add to cart</button> */}
                 </div>
             </div>
         </div>
