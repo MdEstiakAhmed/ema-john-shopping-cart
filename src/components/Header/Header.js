@@ -20,7 +20,7 @@ const Header = () => {
                         <a className="nav-link" href="/orderReview">Order Review</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/ManageInventory">Manage Inventory</a>
+                        <a className="nav-link" href="/manageInventory">Manage Inventory</a>
                     </li>
                     </ul>
                 </div>
