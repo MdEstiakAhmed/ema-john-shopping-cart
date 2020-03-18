@@ -27,8 +27,8 @@ const Header = () => {
             </nav>
             <div className="container">
                 <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="search" placeholder="search content"></input>
+                    <div className="form-group">
+                        <input type="text" className="form-control m-3" id="search" placeholder="search content"></input>
                     </div>
                 </form>
             </div>

@@ -1,12 +1,8 @@
 import React from 'react';
-import './Product.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import {Link} from "react-router-dom";
 
-
-const Product = (props) => {
-    const {key, img, name, seller, wholePrice, priceFraction, stock} = props.product;
+const OrderReviewItem = (props) => {
+    const {key, img, name, seller, wholePrice, priceFraction, stock, cartQuantity, price} = props.product;
     return (
         <div>
             <div className="row product-div shadow">
@@ -15,15 +11,16 @@ const Product = (props) => {
                 </div>
                 <div className="col-8 p-1"> 
                     <p> <Link to={"/product/"+key}>{name}</Link></p>
+                    <h6>Quantity: {cartQuantity}</h6>
+                    <h6>Price: {price}</h6>
                     <h6>by: {seller}</h6>
                     <h5>$<b>{wholePrice}.{priceFraction}</b></h5>
                     <p>only <b>{stock}</b> left in stock - order soon</p>
-                    <button onClick={() => props.btnCk(props.product)} name="ck" className="btn btn-success"><FontAwesomeIcon icon={faShoppingCart} />add to cart</button>
-                    {/* <button onClick={props.btnCk} name="ck" className="btn btn-success"><FontAwesomeIcon icon={faShoppingCart} />add to cart</button> */}
+                    <button onClick={() => props.removeCartItem(key)} name="ck" className="btn btn-success">remove</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Product;
+export default OrderReviewItem;
