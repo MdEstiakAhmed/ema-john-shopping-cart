@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, removeFromDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
 import OrderReviewItem from '../OrderReviewItem/OrderReviewItem';
 import Cart from '../Cart/Cart';
+import { Link } from 'react-router-dom';
+import orderedConfirmLogo from '../../images/giphy.gif';
 
 const OrderReview = () => {
     const [cart, setCart] = useState([]);
+    const [orderedPlace, setOrderedPlace] = useState(false);
     let count = 0;
     const savedCart = getDatabaseCart();
     const totalCart = Object.values(savedCart);
@@ -20,6 +23,12 @@ const OrderReview = () => {
         removeFromDatabaseCart(productKey);
     }
 
+    const placeOrder = () =>{
+        setCart([]);
+        setOrderedPlace(true);
+        processOrder();
+    }
+
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const cartProductKey = Object.keys(savedCart);
@@ -27,10 +36,21 @@ const OrderReview = () => {
         const cartProduct = cartProductKey.map(key =>{
             const products = fakeData.find(product => product.key === key);
             products.cartQuantity = savedCart[key];
+            products.sendingStatus = "order";
             return products;
         })
     setCart(cartProduct);
     },[])
+
+    let thanksForOrder;
+    let home;
+    if(orderedPlace){
+        home = 
+        <Link to = "/shop">
+            <button  className="btn btn-success">home</button>
+        </Link>
+        thanksForOrder = <img src={orderedConfirmLogo} alt=""/>
+    }
     
     return (
         <div>
@@ -45,9 +65,16 @@ const OrderReview = () => {
                         )
                     }
                 </div>
+                {thanksForOrder}
                 <div className="col-2 cart-container">
-                    <Cart cart={cart}></Cart>
+                    <Cart cart={cart}>
+                    <Link to = "/orderReview">
+                        <button onClick = {placeOrder} className="btn btn-success">place order</button>
+                    </Link>
+                    {home}
+                    </Cart>
                 </div>
+                
             </div>
         </div>
     );

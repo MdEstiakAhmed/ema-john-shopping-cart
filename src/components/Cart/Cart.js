@@ -2,7 +2,7 @@ import React from 'react';
 import './Cart.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+
 
 const Cart = (props) => {
     const cart = props.cart;
@@ -11,8 +11,12 @@ const Cart = (props) => {
     let total = 0;
     for(let i = 0; i < cart.length; i++){
         const item = cart[i];
-        total = (total + (item.price * item.cartQuantity)).toFixed(2);    //toFixed() make a number string
-        // debugger;
+        if(item.sendingStatus === "shop"){
+            total = (total + (item.price)).toFixed(2);    //toFixed() make a number string
+        }
+        else{
+            total = (total + (item.price * item.cartQuantity)).toFixed(2);
+        }
         total = Number(total);  //Number make a string into number
         console.log(`${total} + ${item.price} * ${item.cartQuantity}`);
     }
@@ -21,10 +25,7 @@ const Cart = (props) => {
             <h4>order summery</h4>
             <p>total items: {cart.length}</p>
             <p>total price: {total}</p>
-            <Link to = "/orderReview">
-                <button  className="btn btn-success">order review</button>
-            </Link>
-            
+            {props.children}
         </div>
     );
 };
