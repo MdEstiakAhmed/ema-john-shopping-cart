@@ -1,8 +1,12 @@
 import React from 'react';
 import logo from '../../images/logo.png';
 import './Header.css';
+import { useAuth } from '../Login/useAuth';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+    const auth = useAuth();
+    console.log(auth.user);
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,15 +17,29 @@ const Header = () => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/shop">Shop</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/orderReview">Order Review</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/manageInventory">Manage Inventory</a>
-                    </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/shop">Shop</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/orderReview">Order Review</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/manageInventory">Manage Inventory</a>
+                        </li>
+                        <li className="nav-item">
+                            {
+                                auth.user ? 
+                                <a className="nav-link" href="/login">{auth.user.name}</a> :
+                                <a className="nav-link" href="/login">account</a>
+                            }
+                        </li>
+                        <li className="nav-item">
+                            {
+                                auth.user ? 
+                                <a onClick = {auth.googleSignOut} className="nav-link" href="/login">logout</a> :
+                                <a className="nav-link" href="/login">login</a>
+                            }
+                        </li>
                     </ul>
                 </div>
             </nav>

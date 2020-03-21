@@ -5,8 +5,10 @@ import OrderReviewItem from '../OrderReviewItem/OrderReviewItem';
 import Cart from '../Cart/Cart';
 import { Link } from 'react-router-dom';
 import orderedConfirmLogo from '../../images/giphy.gif';
+import { useAuth } from '../Login/useAuth';
 
 const OrderReview = () => {
+    const auth = useAuth();
     const [cart, setCart] = useState([]);
     const [orderedPlace, setOrderedPlace] = useState(false);
     let count = 0;
@@ -68,9 +70,16 @@ const OrderReview = () => {
                 {thanksForOrder}
                 <div className="col-2 cart-container">
                     <Cart cart={cart}>
-                    <Link to = "/orderReview">
-                        <button onClick = {placeOrder} className="btn btn-success">place order</button>
-                    </Link>
+                        {
+                            auth.user ?
+                            <Link to = "/orderReview">
+                                <button onClick = {placeOrder} className="btn btn-success">place order</button>
+                            </Link> :
+                            <Link to = "/login">
+                                <button onClick = {placeOrder} className="btn btn-success">login to order</button>
+                            </Link>
+
+                        }
                     {home}
                     </Cart>
                 </div>
