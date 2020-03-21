@@ -49,7 +49,7 @@ const Auth = () => {
     }
 
     const googleSignOut = () => {
-        firebase.auth().signOut().then(function() {
+        return firebase.auth().signOut().then(function() {
           setUser(null);
     
         }).catch(function(error) {

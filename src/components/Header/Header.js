@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     const auth = useAuth();
     console.log(auth.user);
+    const redirectSignOut = () => {
+        auth.signInWithGoogle()
+        .then(result => {
+            window.location.pathname = '/';
+        })
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,7 +42,7 @@ const Header = () => {
                         <li className="nav-item">
                             {
                                 auth.user ? 
-                                <a onClick = {auth.googleSignOut} className="nav-link" href="/login">logout</a> :
+                                <a onClick = {redirectSignOut} className="nav-link" href="/login">logout</a> :
                                 <a className="nav-link" href="/login">login</a>
                             }
                         </li>

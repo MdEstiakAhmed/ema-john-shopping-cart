@@ -6,6 +6,7 @@ import Cart from '../Cart/Cart';
 import { Link } from 'react-router-dom';
 import orderedConfirmLogo from '../../images/giphy.gif';
 import { useAuth } from '../Login/useAuth';
+import ReactDOM from 'react-dom';
 
 const OrderReview = () => {
     const auth = useAuth();
@@ -53,10 +54,22 @@ const OrderReview = () => {
         </Link>
         thanksForOrder = <img src={orderedConfirmLogo} alt=""/>
     }
+
+    const checkOrder = () => {
+        if(count === 0){
+            ReactDOM.render(<button />, document.getElementById('placeOrder'));
+            console.log(React.Component.document.getElementById('placeOrder'));
+            React.Component.document.getElementById('placeOrder').disable = true;
+        }
+    }
     
     return (
-        <div>
-            <h1>this is order review section {count}</h1>
+        <div onLoad={checkOrder}>
+            {
+                count === 0 ?
+                <h1>your cart is empty. keep shopping</h1> :
+                <h1>order item: {count}</h1>
+            }
             <div className="row">
                 <div className="col-2"></div>
                 <div className="col-8 product-container">
@@ -73,7 +86,7 @@ const OrderReview = () => {
                         {
                             auth.user ?
                             <Link to = "/orderReview">
-                                <button onClick = {placeOrder} className="btn btn-success">place order</button>
+                                <button id="placeOrder" onClick = {placeOrder} className="btn btn-success">place order</button>
                             </Link> :
                             <Link to = "/login">
                                 <button onClick = {placeOrder} className="btn btn-success">login to order</button>
