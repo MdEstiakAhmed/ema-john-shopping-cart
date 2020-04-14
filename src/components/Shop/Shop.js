@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Product from '../Product/Product';
 import fakeData from '../../fakeData'
 import './Shop.css';
 import Cart from '../Cart/Cart';
 import { getDatabaseCart, addToDatabaseCart } from '../../utilities/databaseManager';
 import { Link } from 'react-router-dom';
+
+
+import { useState } from 'react';
+
+
 
 const Shop = () => {
     const [products, setProducts] = useState(fakeData);

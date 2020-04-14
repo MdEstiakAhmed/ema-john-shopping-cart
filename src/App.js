@@ -30,7 +30,7 @@ function App() {
         <Header></Header>
         <Router>
           <Switch>
-            <Route path="/login">
+            <Route path="/Login">
               <Login></Login>
             </Route>
 
@@ -65,4 +65,4 @@ function App() {
 }
 
 
-export default App;
+export default App;z

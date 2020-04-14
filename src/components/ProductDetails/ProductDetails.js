@@ -6,8 +6,9 @@ import {Link} from "react-router-dom";
 
 const ProductDetails = () => {
     const {productKey} = useParams();
+    console.log(productKey);
     const product = fakeData.find(product => product.key === productKey);
-    console.log(product);
+    // console.log(product);
     const {key, img, name, seller, wholePrice, priceFraction, stock} = product;
     return (
         <div>
